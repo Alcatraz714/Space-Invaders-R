@@ -18,7 +18,7 @@ int main()
 
 
         // Clear the window---
-        window.clear(sf::Color::Magenta);
+        window.clear(sf::Color::Black);
 
         //Start
 
@@ -39,6 +39,26 @@ int main()
         Triangle.setFillColor(sf::Color::Blue);
         Triangle.setPosition(300, 300); // Set position
         window.draw(Triangle);
+
+        //Drawing a sprite 
+        sf::Texture outscal_texture;
+        outscal_texture.loadFromFile("assets/textures/outscal_logo.png");
+
+        sf::Sprite outscal_sprite;
+        outscal_sprite.setTexture(outscal_texture);
+
+        outscal_sprite.setPosition(500, 200); // Position
+        outscal_sprite.setRotation(45); // Rotation in degrees
+        outscal_sprite.setScale(0.5, 0.5); // Scale factor
+
+        window.draw(outscal_sprite);
+
+        //Drawing a text
+        sf::Font font;
+        font.loadFromFile("assets/fonts/OpenSans.ttf");
+        sf::Text text("SFML is Awesome", font, 50);
+        text.setFillColor(sf::Color::White);
+        window.draw(text);
 
         //End
 
