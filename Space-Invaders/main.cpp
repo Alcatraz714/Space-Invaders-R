@@ -9,7 +9,7 @@ private:
     // Private Properties
     int health = 3;
     sf::Vector2f position = sf::Vector2f(200.0f, 100.0f);
-    int movement_speed = 5;
+    int movement_speed = 1;
     int player_score = 0;
 
 public:
@@ -18,7 +18,15 @@ public:
     sf::Texture player_texture;
     sf::Sprite player_sprite;
 
-    //Public Getter & Setter methods
+    //Public Functions, Getter & Setter methods
+    void move(float offsetX) {
+        position.x += offsetX;
+    }
+
+    int getMoveSpeed() {
+        return movement_speed;
+    }
+
     int getScore() {
         return player_score;
     };
@@ -35,7 +43,7 @@ public:
         position = newPosition;
     }
 
-    //New methods
+    //New methods to be added
     void takeDamage() {};
     void move() {};
     void shootBullets() {};
@@ -67,20 +75,19 @@ int main()
 
         // Handle keyboard input
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-            player.move();
+            player.move(-1.0f* player.getMoveSpeed());
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-            player.move();
+            player.move(1.0f * player.getMoveSpeed());
         }
 
         // Clear the window---
         window.clear(sf::Color::Black);
 
-        player.player_sprite.setPosition(player.getPosition()); // Set the position of the player sprite
+        // Set and draw player
+        player.player_sprite.setPosition(player.getPosition());
 
-        window.draw(player.player_sprite);    // Draw the player sprite
-
-        window.display(); // Display what was drawn
+        window.draw(player.player_sprite);
 
         // Display whatever you draw
         window.display();
