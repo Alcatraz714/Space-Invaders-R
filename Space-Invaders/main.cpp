@@ -1,8 +1,9 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include "Header/GameService.h"
 
 
-class Player
+/*class Player
 {
 private:
 
@@ -47,10 +48,11 @@ public:
     void takeDamage() {};
     void move() {};
     void shootBullets() {};
-};
+};*/
 
 int main()
 {
+    /*
     // Define the video mode (dimensions)
     sf::VideoMode videoMode = sf::VideoMode(800, 600);
 
@@ -91,7 +93,13 @@ int main()
 
         // Display whatever you draw
         window.display();
-    }
+    }*/
+    GameService game_service;
+    game_service.ignite(); 
 
-    return 0;
+    while (game_service.isRunning())
+    {
+        game_service.update();
+        game_service.render();
+    }
 }
