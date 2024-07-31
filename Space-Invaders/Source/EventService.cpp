@@ -36,7 +36,9 @@ bool EventService::isKeyboardEvent() { return game_event.type == sf::Event::KeyP
 
 //control click on the SFML functions to see what they do internally
 bool EventService::pressedEscapeKey() { return game_event.key.code == sf::Keyboard::Escape; }
-
 bool EventService::isGameWindowOpen() { return game_window != nullptr; }
-
 bool EventService::gameWindowWasClosed() { return game_event.type == sf::Event::Closed; }
+
+// Player inputs 
+bool EventService::pressedLeftKey() { return game_event.key.code == sf::Keyboard::Left; }
+bool EventService::pressedRightKey() { return game_event.key.code == sf::Keyboard::Right; }
