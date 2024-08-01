@@ -1,6 +1,8 @@
 #include "../../Header/Player/PlayerController.h"
-#include "../../Header/EventService.h"
-#include "../../Header/ServiceLocator.h"
+#include "../../Header/Player/PlayerModel.h"
+#include "../../Header/Player/PlayerView.h"
+#include "../../Header/Event/EventService.h"
+#include "../../Header/Global/ServiceLocator.h"
 #include<algorithm>
 
 PlayerController::PlayerController()
