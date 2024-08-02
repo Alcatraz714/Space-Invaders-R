@@ -32,6 +32,8 @@ namespace Main
 	{
 		service_locator->initialize();
 		initializeVariables();
+		// set the gamestate to main menu
+		showMainMenu();
 	}
 
 	void GameService::initializeVariables()
@@ -42,6 +44,11 @@ namespace Main
 	void GameService::destroy()
 	{
 		// don't need to do anything here for now.
+	}
+
+	void GameService::showMainMenu()
+	{
+		setGameState(GameState::MAIN_MENU);
 	}
 
 	// Updates the game logic by delegating to the service locator's update method.

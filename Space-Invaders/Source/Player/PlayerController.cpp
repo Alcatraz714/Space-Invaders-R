@@ -49,13 +49,15 @@ namespace Player
 
 	void PlayerController::processPlayerInput()
 	{
-		// we will move this to event service at a later time
-		if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Left)))
+		
+		EventService* event_service = ServiceLocator::getInstance()->getEventService();
+
+		if (event_service->pressedLeftKey() || event_service->pressedAKey())
 		{
 			moveLeft();
 		}
-		// we will move this to event service at a later time
-		if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Right)))
+		
+		if (event_service->pressedRightKey() || event_service->pressedDKey())
 		{
 			moveRight();
 		}
