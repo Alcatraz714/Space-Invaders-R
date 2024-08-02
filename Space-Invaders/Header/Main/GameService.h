@@ -4,12 +4,20 @@
 
 namespace Main
 {
+	enum class GameState
+	{
+		BOOT,
+		MAIN_MENU,
+		GAMEPLAY,
+	};
+
 	class ServiceLocator;
 
 	class GameService
 	{
 	private:
 
+		static GameState current_state;
 		Global::ServiceLocator* service_locator;
 		sf::RenderWindow* game_window;
 
@@ -26,5 +34,7 @@ namespace Main
 		void update();			// Updates the game logic and game state.
 		void render();			// Renders each frame of the game.
 		bool isRunning();		// Checks if the game is currently running.
+		static void setGameState(GameState new_state);
+		static GameState getGameState();
 	};
 }

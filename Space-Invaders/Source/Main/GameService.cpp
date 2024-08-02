@@ -7,6 +7,9 @@ namespace Main
 	using namespace Global;
 	using namespace Graphics;
 	using namespace Event;
+
+	GameState GameService::current_state = GameState::BOOT;
+
 	// Constructor: Initializes pointers to null.
 	GameService::GameService() {
 		service_locator = nullptr; // Set service locator to null
@@ -62,6 +65,12 @@ namespace Main
 		// Returns true if the game window is open, indicating the game is still running
 		return service_locator->getGraphicService()->isGameWindowOpen();
 	}
+
+	// Setter function foro the game state
+	void GameService::setGameState(GameState new_state) { current_state = new_state; }
+
+	// Getter function for the current game state
+	GameState GameService::getGameState() { return current_state; }
 }
 
 
