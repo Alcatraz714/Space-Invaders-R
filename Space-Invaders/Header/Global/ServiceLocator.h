@@ -5,6 +5,7 @@
 #include "../../Header/Time/TimeService.h"
 #include "../../Header/UI/UIService.h"
 #include "../../Header/Enemy/EnemyService.h"
+#include "../../Header/Gameplay/GameplayService.h"
 
 // ServiceLocator Class Summary: This class manages access to various services in the application.
 // include relevant headers files
@@ -22,6 +23,7 @@ namespace Global
         Time::TimeService* time_service;
         UI::UIService* ui_service;
         Enemy::EnemyService* enemy_service;
+        Gameplay::GameplayService* gameplay_service;
 
         // Public Methods
         ServiceLocator();
@@ -46,5 +48,6 @@ namespace Global
         Time::TimeService* getTimeService(); // Retrieve the TimeService instance
         UI::UIService* getUIService(); // Retrive the UIService instance
         Enemy::EnemyService* getEnemyService(); // Retrive the EnemyService instance
+        Gameplay::GameplayService* getGameplayService(); // Retrive the GameplayService instance
     };
 }
