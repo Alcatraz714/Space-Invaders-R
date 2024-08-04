@@ -40,5 +40,6 @@ namespace Enemy
         MovementDirection getMovementDirection();
         void setMovementDirection(MovementDirection direction);
 
+
     };
 }
