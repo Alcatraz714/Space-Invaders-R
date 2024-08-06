@@ -10,6 +10,20 @@ namespace Enemy
         {
         private:
 
+            float vertical_travel_distance = 100.f;
+
+            void move() override;
+            void moveLeft();
+            void moveRight();
+            void moveDown();
+
+        public:
+
+            ZapperController(EnemyType type);
+            ~ZapperController();
+
+            void initialize() override;
+
         };
     }
 }

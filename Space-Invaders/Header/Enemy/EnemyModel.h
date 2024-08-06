@@ -22,8 +22,8 @@ namespace Enemy
         ~EnemyModel();
 
         //const settings for enemy
-        const sf::Vector2f left_most_position = sf::Vector2f(50.f, 950.f);
-        const sf::Vector2f right_most_position = sf::Vector2f(1800.f, 950.f);
+        const sf::Vector2f left_most_position = sf::Vector2f(50.f, 50.f);
+        const sf::Vector2f right_most_position = sf::Vector2f(1800.f, 50.f);
 
         const float vertical_travel_distance = 100.f;
         const float enemy_movement_speed = 250.0f;
