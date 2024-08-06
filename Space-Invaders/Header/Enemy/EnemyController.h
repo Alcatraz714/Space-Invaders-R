@@ -20,20 +20,22 @@ namespace Enemy
         EnemyView* enemy_view;
         EnemyModel* enemy_model;
 
-        void move();
+        virtual void move();
         void moveLeft();
         void moveRight();
         void moveDown();
 
-    public:
-        EnemyController();
-        ~EnemyController();
+        sf::Vector2f getRandomInitialPosition();
+        void handleOutOfBounds();
 
-        void initialize();
+    public:
+        EnemyController(EnemyType type);
+        virtual ~EnemyController();
+
+        virtual void initialize();
         void update();
         void render();
 
         sf::Vector2f getEnemyPosition();
-        EnemyState getEnemyState();
     };
 }
