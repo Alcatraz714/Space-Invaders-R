@@ -70,6 +70,7 @@ namespace Global
 		ui_service->initialize();
 		enemy_service->initialize();
 		gameplay_service->initialize();
+		element_service->initialize();
 	}
 
 	void ServiceLocator::update()
@@ -83,6 +84,7 @@ namespace Global
 			gameplay_service->update();
 			player_service->update();
 			enemy_service->update();
+			element_service->update();
 		}
 
 		ui_service->update();		
@@ -97,6 +99,7 @@ namespace Global
 			gameplay_service->render();
 			player_service->render();
 			enemy_service->render();
+			element_service->render();
 		}
 
 		ui_service->render();
@@ -110,7 +113,6 @@ namespace Global
 	TimeService* ServiceLocator::getTimeService() { return time_service; }
 	UIService* ServiceLocator::getUIService() { return ui_service; }
 	EnemyService* ServiceLocator::getEnemyService() { return enemy_service; }
-	Gameplay::GameplayService* ServiceLocator::getGameplayService() { return gameplay_service; }
-	Element::ElementService* ServiceLocator::getElementService() { return element_service; }
-
+	GameplayService* ServiceLocator::getGameplayService() { return gameplay_service; }
+	ElementService* ServiceLocator::getElementService() { return element_service; }
 }

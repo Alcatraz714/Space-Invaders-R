@@ -9,10 +9,10 @@ namespace UI
 		{
 
 		private:
-			const sf::String background_texture_path = "assets/textures/space_invaders_bg.png";
-			const sf::String play_button_texture_path = "assets/textures/play_button.png";
-			const sf::String instructions_button_texture_path = "assets/textures/instructions_button.png";
-			const sf::String quit_button_texture_path = "assets/textures/quit_button.png";
+			//const sf::String background_texture_path = "assets/textures/space_invaders_bg.png";
+			//const sf::String play_button_texture_path = "assets/textures/play_button.png";
+			//const sf::String instructions_button_texture_path = "assets/textures/instructions_button.png";
+			//const sf::String quit_button_texture_path = "assets/textures/quit_button.png";
 
 			// Constants:
 			const float button_width = 400.f;
