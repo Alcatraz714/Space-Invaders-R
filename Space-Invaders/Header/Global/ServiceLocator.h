@@ -7,6 +7,7 @@
 #include "../../Header/Enemy/EnemyService.h"
 #include "../../Header/Gameplay/GameplayService.h"
 #include "../../Header/Element/ElementService.h"
+#include "../../Header/Sound/SoundService.h"
 
 // ServiceLocator Class Summary: This class manages access to various services in the application.
 // include relevant headers files
@@ -26,6 +27,7 @@ namespace Global
         Enemy::EnemyService* enemy_service;
         Gameplay::GameplayService* gameplay_service;
         Element::ElementService* element_service;
+        Sound::SoundService* sound_service;
 
         // Public Methods
         ServiceLocator();
@@ -52,5 +54,6 @@ namespace Global
         Enemy::EnemyService* getEnemyService(); // Retrive the EnemyService instance
         Gameplay::GameplayService* getGameplayService(); // Retrive the GameplayService instance
         Element::ElementService* getElementService(); // Retrive the ElementService instance
+        Sound::SoundService* getSoundService(); // Retrive the SoundService instance 
     };
 }

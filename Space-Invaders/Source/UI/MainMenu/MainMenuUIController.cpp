@@ -13,6 +13,7 @@ namespace UI
         using namespace Main;
         using namespace Graphics;
         using namespace Event;
+        using namespace Sound;
 
         MainMenuUIController::MainMenuUIController() { game_window = nullptr; }
 
@@ -97,6 +98,8 @@ namespace UI
 
             if (clickedButton(&play_button_sprite, mouse_position))
             {
+                Global::ServiceLocator::getInstance()->getSoundService()->playSound(SoundType::BUTTON_CLICK); //play button sound
+                Global::ServiceLocator::getInstance()->getSoundService()->playBackgroundMusic(); //play background music
                 GameService::setGameState(GameState::GAMEPLAY);
             }
 
@@ -106,7 +109,9 @@ namespace UI
             }
 
             if (clickedButton(&quit_button_sprite, mouse_position))
+            {
                 game_window->close();
+            }
         }
 
         bool MainMenuUIController::clickedButton(sf::Sprite* button_sprite, sf::Vector2f mouse_position)
