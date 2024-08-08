@@ -11,9 +11,12 @@ namespace Enemy
         private:
 
             float vertical_movement_speed = 100.f;
+            const float subzero_rate_of_fire = 2.f;
 
             void move() override;
             void moveDown();
+
+            void fireBullet() override;
 
         public:
 

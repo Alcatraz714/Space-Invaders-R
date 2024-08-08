@@ -9,6 +9,7 @@ namespace Enemy
 	using namespace Global;
 	using namespace Event;
 	using namespace Time;
+	using namespace Bullet;
 
 	EnemyController::EnemyController(EnemyType type)
 	{
@@ -32,7 +33,10 @@ namespace Enemy
 	void EnemyController::update()
 	{
 		move();
+		updateFireTimer(); //new
+		processBulletFire(); //new
 		enemy_view->update();
+		handleOutOfBounds();
 	}
 
 	void EnemyController::render()
@@ -57,6 +61,20 @@ namespace Enemy
 			break;
 		}
 	}*/
+
+	void EnemyController::updateFireTimer()
+	{
+		elapsed_fire_duration += ServiceLocator::getInstance()->getTimeService()->getDeltaTime(); //update the elapsed duration
+	}
+
+	void EnemyController::processBulletFire() //if elapsed duration is equal to or more than the amount of time we want to wait until firing than call the fire method.
+	{
+		if (elapsed_fire_duration >= rate_of_fire)
+		{
+			fireBullet();
+			elapsed_fire_duration = 0.f; //set elapsed duration back to 0.
+		}
+	}
 
 	sf::Vector2f EnemyController::getRandomInitialPosition()
 	{
