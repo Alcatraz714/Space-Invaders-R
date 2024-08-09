@@ -1,28 +1,33 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
-enum class PlayerState;
-class PlayerView;
-class PlayerModel;
-
-class PlayerController
+namespace Player
 {
-private:
-    
-    PlayerView* player_view;
-    PlayerModel* player_model;
+    class PlayerView;
+    class PlayerModel;
+    enum class PlayerState;
 
-    void processPlayerInput();
-    void moveLeft();
-    void moveRight();
+    class PlayerController
+    {
+    private:
 
-public:
-    PlayerController();
-    ~PlayerController();
+        PlayerView* player_view;
+        PlayerModel* player_model;
 
-    void initialize();
-    void update();
-    void render();
+        void processPlayerInput();
+        void moveLeft();
+        void moveRight();
 
-    sf::Vector2f getPlayerPosition();
-};
+        void fireBullet();
+
+    public:
+        PlayerController();
+        ~PlayerController();
+
+        void initialize();
+        void update();
+        void render();
+
+        sf::Vector2f getPlayerPosition();
+    };
+}
