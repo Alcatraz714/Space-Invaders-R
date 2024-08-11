@@ -7,35 +7,28 @@ namespace Gameplay
 {
 	using namespace Global;
 	using namespace Graphics;
+	using namespace UI::UIElement;
 
-	GameplayView::GameplayView() { }
+	GameplayView::GameplayView() { background_image = new ImageView(); }
 
-	GameplayView::~GameplayView() { }
+	GameplayView::~GameplayView() { delete(background_image); }
 
 	void GameplayView::initialize()
 	{
-		game_window = ServiceLocator::getInstance()->getGraphicService()->getGameWindow();
-		initializeBackgroundSprite();
+		initializeBackgroundImage();
 	}
 
-	void GameplayView::initializeBackgroundSprite()
+	void GameplayView::initializeBackgroundImage()
 	{
-		if (background_texture.loadFromFile(Config::background_texture_path))
-		{
-			background_sprite.setTexture(background_texture);
-			scaleBackgroundSprite();
-		}
+		sf::RenderWindow* game_window = ServiceLocator::getInstance()->getGraphicService()->getGameWindow();
+
+		background_image->initialize(Config::background_texture_path,
+			game_window->getSize().x,
+			game_window->getSize().y,
+			sf::Vector2f(0, 0));
 	}
 
-	void GameplayView::scaleBackgroundSprite()
-	{
-		background_sprite.setScale(
-			static_cast<float>(game_window->getSize().x) / background_sprite.getTexture()->getSize().x,
-			static_cast<float>(game_window->getSize().y) / background_sprite.getTexture()->getSize().y
-		);
-	}
+	void GameplayView::update() { background_image->update(); }
 
-	void GameplayView::update() { }
-
-	void GameplayView::render() { game_window->draw(background_sprite); }
+	void GameplayView::render() { background_image->render(); }
 }

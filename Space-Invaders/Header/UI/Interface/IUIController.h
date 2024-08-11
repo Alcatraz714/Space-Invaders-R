@@ -6,6 +6,7 @@ namespace UI
         class IUIController
         {
         public:
+
             virtual void initialize() = 0;
             virtual void update() = 0;
             virtual void render() = 0;
