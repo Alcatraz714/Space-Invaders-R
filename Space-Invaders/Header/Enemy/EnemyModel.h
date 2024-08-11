@@ -29,6 +29,9 @@ namespace Enemy
         const float vertical_travel_distance = 100.f;
         const float enemy_movement_speed = 250.0f;
 
+        float vertical_movement_speed = 30.0f;
+        float horizontal_movement_speed = 100.0f;
+
         void initialize();
 
         // Getters and Setters

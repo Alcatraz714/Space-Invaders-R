@@ -9,55 +9,58 @@ namespace Enemy
 {
 	using namespace Global;
 	using namespace Graphics;
+	using namespace UI::UIElement;
 
-	EnemyView::EnemyView() { }
+	EnemyView::EnemyView() { createUIElements(); }
 
-	EnemyView::~EnemyView() { }
+	EnemyView::~EnemyView() { destroy(); }
 
 	void EnemyView::initialize(EnemyController* controller)
 	{
 		enemy_controller = controller;
-		game_window = ServiceLocator::getInstance()->getGraphicService()->getGameWindow();
-		initializeEnemySprite(enemy_controller->getEnemyType());
+		initializeImage();
 	}
 
-	void EnemyView::initializeEnemySprite(EnemyType type)
+	void EnemyView::createUIElements()
 	{
-		switch (type)
+		enemy_image = new ImageView();
+	}
+
+	void EnemyView::initializeImage()
+	{
+		enemy_image->initialize(getEnemyTexturePath(), enemy_sprite_width, enemy_sprite_height, enemy_controller->getEnemyPosition());
+	}
+
+	sf::String EnemyView::getEnemyTexturePath()
+	{
+		switch (enemy_controller->getEnemyType())
 		{
-		case::Enemy::EnemyType::SUBZERO:
-			if (enemy_texture.loadFromFile(Config::subzero_texture_path))
-			{
-				enemy_sprite.setTexture(enemy_texture);
-				scaleEnemySprite();
-			}
-			break;
 		case::Enemy::EnemyType::ZAPPER:
-			if (enemy_texture.loadFromFile(Config::zapper_texture_path))
-			{
-				enemy_sprite.setTexture(enemy_texture);
-				scaleEnemySprite();
-			}
-			break;
-		}
-	}
+			return Config::zapper_texture_path;
 
-	void EnemyView::scaleEnemySprite()
-	{
-		// method to scale the Sprite according to our set dimensions. Don't worry about the static_cast, that will be discussed later.
-		enemy_sprite.setScale(
-			static_cast<float>(enemy_sprite_width) / enemy_sprite.getTexture()->getSize().x,
-			static_cast<float>(enemy_sprite_height) / enemy_sprite.getTexture()->getSize().y
-		);
+		case::Enemy::EnemyType::THUNDER_SNAKE:
+			return Config::thunder_snake_texture_path;
+
+		case::Enemy::EnemyType::SUBZERO:
+			return Config::subzero_texture_path;
+
+		case::Enemy::EnemyType::UFO:
+			return Config::ufo_texture_path;
+		}
 	}
 
 	void EnemyView::update()
 	{
-		enemy_sprite.setPosition(enemy_controller->getEnemyPosition());
+		enemy_image->setPosition(enemy_controller->getEnemyPosition());
 	}
 
 	void EnemyView::render()
 	{
-		game_window->draw(enemy_sprite);
+		enemy_image->render();
+	}
+
+	void EnemyView::destroy()
+	{
+		delete (enemy_image);
 	}
 }
