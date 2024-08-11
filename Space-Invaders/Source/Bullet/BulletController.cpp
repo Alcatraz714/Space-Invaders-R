@@ -50,7 +50,7 @@ namespace Bullet
 		}
 	}
 
-	BulletController::BulletController(BulletType type)
+	BulletController::BulletController(BulletType type, Entity::EntityType owner_type)
 	{
 		bullet_view = new BulletView();
 		bullet_model = new BulletModel(type);
