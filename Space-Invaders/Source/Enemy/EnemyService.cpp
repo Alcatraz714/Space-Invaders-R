@@ -7,12 +7,14 @@
 #include "../../Header/Enemy/Controllers/ZapperController.h"
 #include "../../Header/Enemy/Controllers/ThunderSnakeController.h"
 #include "../../Header/Enemy/Controllers/UFOController.h"
+#include "../../Header/Collision/ICollider.h"
 
 namespace Enemy
 {
 	using namespace Global;
 	using namespace Time;
 	using namespace Controller;
+	using namespace Collision;
 
 	EnemyService::EnemyService() { std::srand(static_cast<unsigned>(std::time(nullptr))); }
 
@@ -28,12 +30,22 @@ namespace Enemy
 		updateSpawnTimer();
 		processEnemySpawn();
 
-		for (int i = 0; i < enemy_list.size(); i++) enemy_list[i]->update();
+		for (EnemyController* enemy : enemy_list)
+			enemy->update();
+
+		destroyFlaggedEnemies();
 	}
 
 	void EnemyService::render()
 	{
-		for (int i = 0; i < enemy_list.size(); i++) enemy_list[i]->render();
+		for (EnemyController* enemy : enemy_list)
+			enemy->render();
+	}
+
+	void EnemyService::reset()
+	{
+		destroy();
+		spawn_timer = 0.0f;
 	}
 
 	EnemyController* EnemyService::spawnEnemy()
@@ -49,10 +61,9 @@ namespace Enemy
 
 	void EnemyService::destroyEnemy(EnemyController* enemy_controller)
 	{
+		dynamic_cast<ICollider*>(enemy_controller)->disableCollision();
+		flagged_enemy_list.push_back(enemy_controller);
 		enemy_list.erase(std::remove(enemy_list.begin(), enemy_list.end(), enemy_controller), enemy_list.end());
-
-		// Delete the enemy_controller object from memory to free up resources.
-		delete(enemy_controller);
 	}
 
 	void EnemyService::updateSpawnTimer()
@@ -95,6 +106,21 @@ namespace Enemy
 
 	void EnemyService::destroy()
 	{
-		for (int i = 0; i < enemy_list.size(); i++) delete (enemy_list[i]); //delete all enemies
+		for (int i = 0; i < enemy_list.size(); i++)
+		{
+			ServiceLocator::getInstance()->getCollisionService()->removeCollider(dynamic_cast<ICollider*>(enemy_list[i]));
+			delete (enemy_list[i]);
+		}
+		enemy_list.clear();
+	}
+
+	void EnemyService::destroyFlaggedEnemies()
+	{
+		for (int i = 0; i < flagged_enemy_list.size(); i++)
+		{
+			ServiceLocator::getInstance()->getCollisionService()->removeCollider(dynamic_cast<ICollider*>(flagged_enemy_list[i]));
+			delete (flagged_enemy_list[i]);
+		}
+		flagged_enemy_list.clear();
 	}
 }

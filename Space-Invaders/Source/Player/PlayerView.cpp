@@ -31,7 +31,6 @@ namespace Player
 
 	void PlayerView::update()
 	{
-		//set the updated position before we render
 		player_image->setPosition(player_controller->getPlayerPosition());
 		player_image->update();
 	}
@@ -39,6 +38,11 @@ namespace Player
 	void PlayerView::render()
 	{
 		player_image->render();
+	}
+
+	const sf::Sprite& PlayerView::getPlayerSprite()
+	{
+		return player_image->getSprite();
 	}
 
 	void PlayerView::destroy()

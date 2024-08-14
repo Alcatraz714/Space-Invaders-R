@@ -40,6 +40,11 @@ namespace Bullet
 		bullet_image->render();
 	}
 
+	const sf::Sprite& BulletView::getBulletSprite()
+	{
+		return bullet_image->getSprite();
+	}
+
 	sf::String BulletView::getBulletTexturePath()
 	{
 		switch (bullet_controller->getBulletType())

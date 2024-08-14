@@ -15,6 +15,11 @@ namespace Enemy
 
 	EnemyView::~EnemyView() { destroy(); }
 
+	const sf::Sprite& EnemyView::getEnemySprite()
+	{
+		return enemy_image->getSprite();
+	}
+
 	void EnemyView::initialize(EnemyController* controller)
 	{
 		enemy_controller = controller;

@@ -1,5 +1,6 @@
 #include "../../Header/Enemy/Controllers/ZapperController.h"
 #include "../../Header/Enemy/EnemyModel.h"
+#include "../../Header/Enemy/EnemyView.h"
 #include "../../Header/Enemy/EnemyConfig.h"
 #include "../../Header/Global/ServiceLocator.h"
 #include "../../Header/Bullet/BulletConfig.h"
@@ -120,7 +121,12 @@ namespace Enemy
 		{
 			ServiceLocator::getInstance()->getBulletService()->spawnBullet(BulletType::LASER_BULLET,
 				enemy_model->getEnemyPosition() + enemy_model->barrel_position_offset,
-				Bullet::MovementDirection::DOWN);
+				Bullet::MovementDirection::DOWN, enemy_model->getEntityType());
+		}
+
+		void ZapperController::destroy()
+		{
+			EnemyController::destroy();
 		}
 	}
 }
