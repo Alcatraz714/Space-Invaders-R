@@ -1,7 +1,7 @@
 #pragma once
 #include "../../Header/Projectile/IProjectile.h"
-#include "../../Header/Bullet/BulletConfig.h"
 #include "../../Header/Entity/EntityConfig.h"
+#include "../Collision/ICollider.h"
 
 namespace Bullet
 {
@@ -9,7 +9,7 @@ namespace Bullet
     class BulletModel;
     enum class BulletType;
 
-    class BulletController : public Projectile::IProjectile 
+    class BulletController : public Projectile::IProjectile, public Collision::ICollider
     {
     protected:
 
@@ -17,6 +17,13 @@ namespace Bullet
         BulletModel* bullet_model;
 
         void updateProjectilePosition() override;
+
+        //Collision funcs
+        void processBulletCollision(ICollider* other_collider);
+        void processEnemyCollision(ICollider* other_collider);
+        void processPlayerCollision(ICollider* other_collider);
+        void processBunkerCollision(ICollider* other_collider);
+
 
         void moveUp();
         void moveDown();
@@ -26,6 +33,7 @@ namespace Bullet
 
         BulletController(BulletType type, Entity::EntityType owner_type);
         virtual ~BulletController() override;
+
         void initialize(sf::Vector2f position, Bullet::MovementDirection direction) override;
         void update() override;
         void render() override;
@@ -33,5 +41,8 @@ namespace Bullet
         sf::Vector2f getProjectilePosition() override;
         BulletType getBulletType();
         Entity::EntityType getOwnerEntityType();
+
+        const sf::Sprite& getColliderSprite() override;
+        void onCollision(ICollider* other_collider) override;
     };
 }

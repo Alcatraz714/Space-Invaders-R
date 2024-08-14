@@ -26,7 +26,7 @@ namespace Enemy
     public:
         EnemyView();
         ~EnemyView();
-
+        const sf::Sprite& getEnemySprite();
         void initialize(EnemyController* controller);
         void update();
         void render();

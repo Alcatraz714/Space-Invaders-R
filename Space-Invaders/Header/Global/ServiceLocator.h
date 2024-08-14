@@ -10,6 +10,7 @@
 #include "../../Header/Sound/SoundService.h"
 #include "../../Header/Bullet/BulletService.h"
 #include "../../Header/Powerups/PowerupService.h"
+#include "../../Header/Collision/CollisionService.h"
 
 
 // ServiceLocator Class Summary: This class manages access to various services in the application.
@@ -33,6 +34,7 @@ namespace Global
         Sound::SoundService* sound_service;
         Bullet::BulletService* bullet_service;
         Powerup::PowerupService* powerup_service;
+        Collision::CollisionService* collision_service;
 
         // Public Methods
         ServiceLocator();
@@ -62,6 +64,7 @@ namespace Global
         Sound::SoundService* getSoundService(); // Retrive the SoundService instance 
         Bullet::BulletService* getBulletService(); // Retrive the BulletService instance
         Powerup::PowerupService* getPowerupService(); // Retrive the PowerupService instance
+        Collision::CollisionService* getCollisionService(); // Retrive the CollisionService instance
         void deleteServiceLocator();
     };
 }

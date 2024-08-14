@@ -29,14 +29,13 @@ namespace Bullet
         void setBulletPosition(sf::Vector2f position);
 
         BulletType getBulletType();
-        void setBulletType(BulletType type);
+
+        Entity::EntityType getOwnerEntityType();
 
         MovementDirection getMovementDirection();
         void setMovementDirection(MovementDirection direction);
 
         float getMovementSpeed();
         void setMovementSpeed(float speed);
-
-        Entity::EntityType getOwnerEntityType();
     };
 }

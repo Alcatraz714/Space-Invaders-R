@@ -18,6 +18,8 @@ namespace Enemy
 
             void fireBullet() override;
 
+            void destroy();
+
         public:
 
             SubzeroController(EnemyType type);

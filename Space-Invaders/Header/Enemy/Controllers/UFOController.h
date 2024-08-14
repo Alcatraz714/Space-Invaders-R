@@ -15,6 +15,7 @@ namespace Enemy
             void moveRight();
 
             void fireBullet() override;
+            void destroy() override;
             Powerup::PowerupType getRandomPowerupType();
 
         public:
@@ -22,6 +23,7 @@ namespace Enemy
             ~UFOController();
 
             void initialize() override;
+            void onCollision(ICollider* other_collider) override;
         };
     }
 }

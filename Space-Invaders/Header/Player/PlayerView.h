@@ -25,6 +25,7 @@ namespace Player
 
         void update();
         void render();
+        const sf::Sprite& getPlayerSprite();
         void initialize(PlayerController* controller);
     };
 }
