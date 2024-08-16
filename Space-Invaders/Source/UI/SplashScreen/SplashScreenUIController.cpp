@@ -17,7 +17,7 @@ namespace UI
 
         SplashScreenUIController::SplashScreenUIController()
         {
-            outscal_logo_view = new ImageView();
+            outscal_logo_view = new AnimatedImageView();
         }
 
         SplashScreenUIController::~SplashScreenUIController()
@@ -32,8 +32,7 @@ namespace UI
 
         void SplashScreenUIController::update()
         {
-            updateTimer();
-            showMainMenu();
+            outscal_logo_view->update();
         }
 
         void SplashScreenUIController::render()
@@ -48,21 +47,6 @@ namespace UI
 
         }
 
-        void SplashScreenUIController::showMainMenu()
-        {
-            if (elapsed_duration >= splash_screen_duration)
-            {
-                Global::ServiceLocator::getInstance()->getSoundService()->playBackgroundMusic();
-                GameService::setGameState(GameState::MAIN_MENU);
-            }
-
-        }
-
-        void SplashScreenUIController::updateTimer()
-        {
-            elapsed_duration += Global::ServiceLocator::getInstance()->getTimeService()->getDeltaTime();
-        }
-
         sf::Vector2f SplashScreenUIController::getLogoPosition()
         {
             sf::RenderWindow* game_window = Global::ServiceLocator::getInstance()->getGraphicService()->getGameWindow();
@@ -75,7 +59,18 @@ namespace UI
 
         void SplashScreenUIController::show()
         {
+            outscal_logo_view->playAnimation(AnimationType::FADE_IN, logo_animation_duration, std::bind(&SplashScreenUIController::fadeInAnimationCallback, this));
+        }
 
+        void SplashScreenUIController::fadeInAnimationCallback()
+        {
+            outscal_logo_view->playAnimation(AnimationType::FADE_OUT, logo_animation_duration, std::bind(&SplashScreenUIController::fadeOutAnimationCallback, this));
+        }
+
+        void SplashScreenUIController::fadeOutAnimationCallback()
+        {
+            ServiceLocator::getInstance()->getSoundService()->playBackgroundMusic();
+            GameService::setGameState(GameState::MAIN_MENU);
         }
     }
 }
