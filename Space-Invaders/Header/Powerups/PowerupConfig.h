@@ -6,6 +6,6 @@ namespace Powerup
 		SHIELD,
 		RAPID_FIRE,
 		TRIPPLE_LASER,
-		OUTSCAL_BOMB, // later redacted
+		OUTSCAL_BOMB,
 	};
 }

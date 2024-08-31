@@ -1,39 +1,35 @@
 #include "../../Header/Main/GameService.h"
 #include "../../Header/Graphic/GraphicService.h"
-#include "../../Header/Global/ServiceLocator.h"
+#include "../../header/Event/EventService.h"
+#include "../../header/UI/UIService.h"
 
 namespace Main
 {
 	using namespace Global;
 	using namespace Graphics;
 	using namespace Event;
+	using namespace UI;
 
 	GameState GameService::current_state = GameState::BOOT;
 
-	// Constructor: Initializes pointers to null.
 	GameService::GameService() {
-		service_locator = nullptr; // Set service locator to null
-		game_window = nullptr; // Set game window to null
+		service_locator = nullptr;
 	}
 
-	// Destructor: Calls the destroy function to clean up resources.
 	GameService::~GameService() {
-		destroy(); // Clean up and release resources
+		destroy();
 	}
 
-	// Prepares the game service for use by obtaining the service locator instance and initializing services.
 	void GameService::ignite() {
 		service_locator = Global::ServiceLocator::getInstance(); // Get ServiceLocator
 		initialize(); // Initialize services.
 	}
 
-	//initialize service locator and other variables
 	void GameService::initialize()
 	{
 		service_locator->initialize();
 		initializeVariables();
-		// set the gamestate to main menu
-		showMainMenu();
+		showSplashScreen();
 	}
 
 	void GameService::initializeVariables()
@@ -41,43 +37,35 @@ namespace Main
 		game_window = service_locator->getGraphicService()->getGameWindow(); //set game window (it was null before this)
 	}
 
-	void GameService::destroy()
+	void GameService::showSplashScreen()
 	{
-		// don't need to do anything here for now.
+		setGameState(GameState::SPLASH_SCREEN);
+		ServiceLocator::getInstance()->getUIService()->showScreen();
 	}
 
-	void GameService::showMainMenu()
+	void GameService::update() 
 	{
-		setGameState(GameState::MAIN_MENU);
-	}
-
-	// Updates the game logic by delegating to the service locator's update method.
-	void GameService::update() {
-
 		service_locator->getEventService()->processEvents();
-
-		service_locator->update(); // Call update on the service locator which then updates all its managed services
+		service_locator->update();
 	}
 
-	// Clears the window then display it.
-	void GameService::render() {
-		// Clears the game window with the background color provided by the graphic service
-		game_window->clear(service_locator->getGraphicService()->getWindowColor());
-		service_locator->render(); // Render the current frame using the service locator
-		game_window->display(); // Display the rendered frame on the game window
+	void GameService::render() 
+	{	
+		game_window->clear();
+		service_locator->render();
+		game_window->display();
 	}
-
-	// Checks if the game is still running by querying the graphic service's window open status.
-	bool GameService::isRunning() {
-		// Returns true if the game window is open, indicating the game is still running
+	
+	bool GameService::isRunning() 
+	{
 		return service_locator->getGraphicService()->isGameWindowOpen();
 	}
-
-	// Setter function foro the game state
+	
 	void GameService::setGameState(GameState new_state) { current_state = new_state; }
 
-	// Getter function for the current game state
 	GameState GameService::getGameState() { return current_state; }
+
+	void GameService::destroy() {  }
 }
 
 

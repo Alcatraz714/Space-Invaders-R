@@ -19,6 +19,8 @@ namespace Enemy
 
             void fireBullet() override;
 
+            void destroy() override;
+
             MovementDirection getInitialMovementDirection();
 
         public:

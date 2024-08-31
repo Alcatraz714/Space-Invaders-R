@@ -1,7 +1,6 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-#include "../../Header/Enemy/EnemyConfig.h"
 #include "../../Header/UI/UIElement/ImageView.h"
 
 namespace Enemy
@@ -26,9 +25,10 @@ namespace Enemy
     public:
         EnemyView();
         ~EnemyView();
-
+        
         void initialize(EnemyController* controller);
         void update();
         void render();
+        const sf::Sprite& getEnemySprite();
     };
 }

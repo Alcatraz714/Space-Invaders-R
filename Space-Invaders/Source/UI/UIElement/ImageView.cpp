@@ -76,5 +76,23 @@ namespace UI
 
             image_sprite.setPosition(x_position, y_position);
         }
+
+        void ImageView::setTextureRect(sf::IntRect texture_rect)
+        {
+            image_sprite.setTextureRect(texture_rect);
+        }
+
+        void ImageView::setScale(float width, float height, float tile_width, float tile_height)
+        {
+            float scale_x = width / tile_width;
+            float scale_y = height / tile_height;
+
+            image_sprite.setScale(scale_x, scale_y);
+        }
+
+        const sf::Sprite& ImageView::getSprite()
+        {
+            return image_sprite; //returns the sprite.
+        }
     }
 }

@@ -1,16 +1,14 @@
 #include "../../Header/Event/EventService.h"
-#include "../../Header/Main/GameService.h"
 #include "../../Header/Graphic/GraphicService.h"
 #include "../../Header/Global/ServiceLocator.h"
 
 namespace Event
 {
+    using namespace Global;
 
     EventService::EventService() { game_window = nullptr; }
 
     EventService::~EventService() = default; //calls the default destructor
-
-    using namespace Global;
 
     void EventService::initialize()
     {
@@ -102,17 +100,4 @@ namespace Event
     bool EventService::pressedLeftMouseButton() { return left_mouse_button_state == ButtonState::PRESSED; }
 
     bool EventService::pressedRightMouseButton() { return right_mouse_button_state == ButtonState::PRESSED; }
-
-    /*bool EventService::pressedLeftKey() { return game_event.key.code == sf::Keyboard::Left; }
-    bool EventService::pressedRightKey() { return game_event.key.code == sf::Keyboard::Right; }
-    bool EventService::pressedLeftMouseButton()
-    {
-        // check if a mouse button was pressed and which mouse button it was
-        return game_event.type == sf::Event::MouseButtonPressed && game_event.mouseButton.button == sf::Mouse::Left;
-    }
-
-    bool EventService::pressedRightMouseButton()
-    {
-        return game_event.type == sf::Event::MouseButtonPressed && game_event.mouseButton.button == sf::Mouse::Right;
-    }*/
 }

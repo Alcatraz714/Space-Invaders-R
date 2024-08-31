@@ -16,6 +16,8 @@ namespace Global
 		static const sf::String ufo_texture_path;
 		static const sf::String bunker_texture_path;
 
+		static const sf::String explosion_texture_path;
+
 		static const sf::String shield_texture_path;
 		static const sf::String tripple_laser_texture_path;
 		static const sf::String rapid_fire_texture_path;
@@ -35,5 +37,8 @@ namespace Global
 
 		static const sf::String background_music_path;
 		static const sf::String button_click_sound_path;
+		static const sf::String bullet_fire_sound_path;
+		static const sf::String powerup_enabled_sound_path;
+		static const sf::String powerup_disabled_sound_path;
 	};
 }
