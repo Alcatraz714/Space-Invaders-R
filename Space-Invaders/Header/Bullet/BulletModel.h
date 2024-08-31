@@ -14,9 +14,8 @@ namespace Bullet
         sf::Vector2f bullet_position;
 
         BulletType bullet_type;
-        MovementDirection movement_direction;
-
         Entity::EntityType owner_type;
+        MovementDirection movement_direction;
 
     public:
 

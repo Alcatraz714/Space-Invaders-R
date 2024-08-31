@@ -7,7 +7,6 @@
 namespace Player
 {
     class PlayerView;
-    class PlayerModel;
     enum class PlayerState;
 
     class PlayerController : public Collision::ICollider
@@ -18,7 +17,7 @@ namespace Player
         float elapsed_tripple_laser_duration;
 
         float elapsed_fire_duration;
-        float elapsed_freez_duration;
+        float elapsed_freeze_duration;
 
         PlayerView* player_view;
         PlayerModel* player_model;
@@ -54,18 +53,18 @@ namespace Player
 
         void reset();
 
+        void decreasePlayerLive();
+        inline void increaseEnemiesKilled(int val) { PlayerModel::enemies_killed += val; }
+        inline void increaseBulletsFired(int val) { PlayerModel::bullets_fired += val; }
+
         void enableShield();
         void enableRapidFire();
         void enableTrippleLaser();
 
         sf::Vector2f getPlayerPosition();
-        int getPlayerScore();
         PlayerState getPlayerState();
 
         const sf::Sprite& getColliderSprite() override;
         void onCollision(ICollider* other_collider) override;
-
-        void decreasePlayerLive();
-        inline void increaseEnemiesKilled(int val) { PlayerModel::enemies_killed += val; }
     };
 }

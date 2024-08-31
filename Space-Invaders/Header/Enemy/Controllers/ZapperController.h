@@ -1,6 +1,5 @@
 #pragma once
-
-#include "../../header/Enemy/EnemyController.h"
+#include "../../Header/Enemy/EnemyController.h"
 
 namespace Enemy
 {
@@ -18,8 +17,7 @@ namespace Enemy
             void moveDown();
 
             void fireBullet() override;
-
-            void destroy();
+            void destroy() override;
 
         public:
 

@@ -1,12 +1,10 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "../../Header/Bullet/BulletController.h"
 #include "../../Header/UI/UIElement/ImageView.h"
 
 namespace Bullet
 {
     class BulletController;
-    enum class BulletType;
 
     class BulletView
     {

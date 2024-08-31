@@ -1,5 +1,4 @@
 #pragma once
-#include "../../Header/Player/PlayerController.h"
 
 namespace Player
 {
@@ -23,6 +22,7 @@ namespace Player
 		void enableTrippleLaser();
 
 		void reset();
+
 		void increaseEnemiesKilled(int val);
 	};
 }

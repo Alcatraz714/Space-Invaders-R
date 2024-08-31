@@ -25,10 +25,11 @@ namespace Player
         sf::Vector2f player_position;
         Entity::EntityType entity_type;
         PlayerState player_state; //Declaration
-        int player_score;
 
         static int player_lives;
+        static int player_score;
         static int enemies_killed;
+        static int bullets_fired;
 
         bool b_shield;
         bool b_rapid_fire;
@@ -51,13 +52,6 @@ namespace Player
         const float rapid_fire_cooldown_duration = 0.05f;
         const float tripple_laser_position_offset = 30.f;
 
-        float elapsed_shield_duration;
-        float elapsed_rapid_fire_duration;
-        float elapsed_tripple_laser_duration;
-
-        float elapsed_fire_duration;
-        float elapsed_freeze_duration;
-
         const float player_movement_speed = 600.0f;
         static const int invincible_player_alpha = 170.f;
 
@@ -69,9 +63,6 @@ namespace Player
 
         sf::Vector2f getPlayerPosition();
         void setPlayerPosition(sf::Vector2f position);
-
-        int getPlayerScore();
-        void setPlayerScore(int score);
 
         //new getter and setter
         PlayerState getPlayerState();

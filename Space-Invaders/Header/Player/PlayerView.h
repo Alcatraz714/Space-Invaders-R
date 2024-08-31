@@ -1,6 +1,5 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "../../Header/Player/PlayerController.h"
 #include "../../Header/UI/UIElement/ImageView.h"
 
 namespace Player
@@ -25,6 +24,8 @@ namespace Player
 
         void update();
         void render();
+
+        void setPlayerHighlight(bool b_highlight);
         const sf::Sprite& getPlayerSprite();
         void initialize(PlayerController* controller);
     };

@@ -8,7 +8,7 @@ namespace Bullet
         class FrostBulletController : public BulletController
         {
         private:
-            const float torpedo_movement_speed = 500.f;
+            const float frost_bullet_movement_speed = 500.f;
 
         public:
             FrostBulletController(BulletType type, Entity::EntityType owner_type);

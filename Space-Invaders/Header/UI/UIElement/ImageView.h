@@ -26,6 +26,9 @@ namespace UI
 			virtual void setOriginAtCentre();
 			virtual void setImageAlpha(float alpha);
 			virtual void setCentreAlinged();
+			// animation sprite variants of scale and set
+			virtual void setTextureRect(sf::IntRect texture_rect);
+			virtual void setScale(float width, float height, float tile_width, float tile_height);
 
 			const virtual sf::Sprite& getSprite();
 		};
