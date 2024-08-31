@@ -15,48 +15,6 @@ namespace Bullet
 	using namespace Enemy;
 	using namespace Element::Bunker;
 
-	void Bullet::BulletController::updateProjectilePosition()
-	{
-		switch (bullet_model->getMovementDirection())
-		{
-		case::Bullet::MovementDirection::UP:
-			moveUp();
-			break;
-
-		case::Bullet::MovementDirection::DOWN:
-			moveDown();
-			break;
-		}
-	}
-
-	void Bullet::BulletController::moveUp()
-	{
-		sf::Vector2f currentPosition = bullet_model->getBulletPosition();
-		currentPosition.y -= bullet_model->getMovementSpeed() * ServiceLocator::getInstance()->getTimeService()->getDeltaTime();
-
-		bullet_model->setBulletPosition(currentPosition);
-	}
-
-	void Bullet::BulletController::moveDown()
-	{
-		sf::Vector2f currentPosition = bullet_model->getBulletPosition();
-		currentPosition.y += bullet_model->getMovementSpeed() * ServiceLocator::getInstance()->getTimeService()->getDeltaTime();
-
-		bullet_model->setBulletPosition(currentPosition);
-	}
-
-	void Bullet::BulletController::handleOutOfBounds()
-	{
-		sf::Vector2f bulletPosition = getProjectilePosition();
-		sf::Vector2u windowSize = ServiceLocator::getInstance()->getGraphicService()->getGameWindow()->getSize();
-
-		if (bulletPosition.x < 0 || bulletPosition.x > windowSize.x ||
-			bulletPosition.y < 0 || bulletPosition.y > windowSize.y)
-		{
-			ServiceLocator::getInstance()->getBulletService()->destroyBullet(this);
-		}
-	}
-
 	BulletController::BulletController(BulletType type, Entity::EntityType owner_type)
 	{
 		bullet_view = new BulletView();
@@ -87,6 +45,34 @@ namespace Bullet
 		bullet_view->render();
 	}
 
+	void Bullet::BulletController::moveUp()
+	{
+		sf::Vector2f currentPosition = bullet_model->getBulletPosition();
+		currentPosition.y -= bullet_model->getMovementSpeed() * ServiceLocator::getInstance()->getTimeService()->getDeltaTime();
+
+		bullet_model->setBulletPosition(currentPosition);
+	}
+
+	void Bullet::BulletController::moveDown()
+	{
+		sf::Vector2f currentPosition = bullet_model->getBulletPosition();
+		currentPosition.y += bullet_model->getMovementSpeed() * ServiceLocator::getInstance()->getTimeService()->getDeltaTime();
+
+		bullet_model->setBulletPosition(currentPosition);
+	}
+
+	void Bullet::BulletController::handleOutOfBounds()
+	{
+		sf::Vector2f bulletPosition = getProjectilePosition();
+		sf::Vector2u windowSize = ServiceLocator::getInstance()->getGraphicService()->getGameWindow()->getSize();
+
+		if (bulletPosition.x < 0 || bulletPosition.x > windowSize.x ||
+			bulletPosition.y < 0 || bulletPosition.y > windowSize.y)
+		{
+			ServiceLocator::getInstance()->getBulletService()->destroyBullet(this);
+		}
+	}
+
 	sf::Vector2f BulletController::getProjectilePosition()
 	{
 		return bullet_model->getBulletPosition();
@@ -113,6 +99,20 @@ namespace Bullet
 		processEnemyCollision(other_collider);
 		processBunkerCollision(other_collider);
 		processBulletCollision(other_collider);
+	}
+
+	void Bullet::BulletController::updateProjectilePosition()
+	{
+		switch (bullet_model->getMovementDirection())
+		{
+		case::Bullet::MovementDirection::UP:
+			moveUp();
+			break;
+
+		case::Bullet::MovementDirection::DOWN:
+			moveDown();
+			break;
+		}
 	}
 
 	void BulletController::processBulletCollision(ICollider* other_collider)

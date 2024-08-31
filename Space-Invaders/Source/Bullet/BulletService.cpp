@@ -27,18 +27,21 @@ namespace Bullet
 
 	void BulletService::update()
 	{
-		for (int i = 0; i < bullet_list.size(); i++) bullet_list[i]->update();
+		for (Projectile::IProjectile* bullet : bullet_list)
+			bullet->update();
+
 		destroyFlaggedBullets();
 	}
 
 	void BulletService::render()
 	{
-		for (int i = 0; i < bullet_list.size(); i++) bullet_list[i]->render();
+		for (Projectile::IProjectile* bullet : bullet_list)
+			bullet->render();
 	}
 
-	BulletController* BulletService::createBullet(BulletType bullet_type, Entity::EntityType owner_type)
+	BulletController* BulletService::createBullet(BulletType type, Entity::EntityType owner_type)
 	{
-		switch (bullet_type)
+		switch (type)
 		{
 		case::Bullet::BulletType::LASER_BULLET:
 			return new LaserBulletController(Bullet::BulletType::LASER_BULLET, owner_type);
@@ -80,22 +83,21 @@ namespace Bullet
 		bullet_list.clear();
 	}
 
-	BulletController* BulletService::spawnBullet(BulletType bullet_type, sf::Vector2f position, MovementDirection direction, Entity::EntityType owner_type)
+	BulletController* BulletService::spawnBullet(BulletType type, sf::Vector2f position, MovementDirection direction, Entity::EntityType owner_type)
 	{
-		BulletController* bullet_controller = createBullet(bullet_type, owner_type);
-
+		BulletController* bullet_controller = createBullet(type, owner_type);
 		bullet_controller->initialize(position, direction);
+
+		ServiceLocator::getInstance()->getCollisionService()->addCollider(dynamic_cast<ICollider*>(bullet_controller));
 		bullet_list.push_back(bullet_controller);
 		return bullet_controller;
 	}
 
 	void BulletService::destroyBullet(BulletController* bullet_controller)
 	{
-		if (std::find(flagged_bullet_list.begin(), flagged_bullet_list.end(), bullet_controller) == flagged_bullet_list.end())
-		{
-			flagged_bullet_list.push_back(bullet_controller);
-			bullet_list.erase(std::remove(bullet_list.begin(), bullet_list.end(), bullet_controller), bullet_list.end());
-		}
+		dynamic_cast<ICollider*>(bullet_controller)->disableCollision();
+		flagged_bullet_list.push_back(bullet_controller);
+		bullet_list.erase(std::remove(bullet_list.begin(), bullet_list.end(), bullet_controller), bullet_list.end());
 	}
 
 	void BulletService::reset() 

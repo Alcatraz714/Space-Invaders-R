@@ -1,20 +1,17 @@
-#include "../../header/Enemy/EnemyController.h"
-#include "../../header/Enemy/EnemyView.h"
-#include "../../header/Enemy/EnemyModel.h"
-#include "../../header/Enemy/EnemyConfig.h"
-#include "../../header/Global/ServiceLocator.h"
-#include "../../header/Event/EventService.h"
-#include "../../header/Bullet/BulletConfig.h"
-#include "../../header/Entity/EntityConfig.h"
-#include "../../header/Bullet/BulletController.h"
-#include "../../header/Player/PlayerController.h"
-#include "../../header/Sound/SoundService.h"
+#include "../../Header/Enemy/EnemyController.h"
+#include "../../Header/Enemy/EnemyView.h"
+#include "../../Header/Enemy/EnemyModel.h"
+#include "../../Header/Enemy/EnemyConfig.h"
+#include "../../Header/Global/ServiceLocator.h"
+#include "../../Header/Bullet/BulletConfig.h"
+#include "../../Header/Entity/EntityConfig.h"
+#include "../../Header/Bullet/BulletController.h"
+#include "../../Header/Player/PlayerController.h"
+#include "../../Header/Sound/SoundService.h"
 
 namespace Enemy
 {
 	using namespace Global;
-	using namespace Event;
-	using namespace Time;
 	using namespace Bullet;
 	using namespace Collision;
 	using namespace Entity;
@@ -43,34 +40,15 @@ namespace Enemy
 	void EnemyController::update()
 	{
 		move();
-		updateFireTimer(); //new
-		processBulletFire(); //new
+		updateFireTimer();
+		processBulletFire();
 		enemy_view->update();
-		handleOutOfBounds();
 	}
 
 	void EnemyController::render()
 	{
 		enemy_view->render();
 	}
-
-	/*void EnemyController::move()
-	{
-		switch (enemy_model->getMovementDirection())
-		{
-		case::Enemy::MovementDirection::LEFT:
-			moveLeft();
-			break;
-
-		case::Enemy::MovementDirection::RIGHT:
-			moveRight();
-			break;
-
-		case::Enemy::MovementDirection::DOWN:
-			moveDown();
-			break;
-		}
-	}*/
 
 	void EnemyController::updateFireTimer()
 	{
@@ -146,6 +124,11 @@ namespace Enemy
 
 	void EnemyController::destroy()
 	{
+		ServiceLocator::getInstance()->getAnimationService()->spawnAnimationSystem(enemy_model->getEnemyPosition(),
+			Animation::AnimationType::EXPLOSION);
+
+		ServiceLocator::getInstance()->getSoundService()->playSound(SoundType::EXPLOSION);
+
 		ServiceLocator::getInstance()->getPlayerService()->increaseEnemiesKilled(1);
 		ServiceLocator::getInstance()->getEnemyService()->destroyEnemy(this);
 	}

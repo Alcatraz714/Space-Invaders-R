@@ -1,12 +1,12 @@
-#include "../../header/Enemy/Controllers/UFOController.h"
-#include "../../header/Enemy/EnemyView.h"
-#include "../../header/Enemy/EnemyModel.h"
-#include "../../header/Enemy/EnemyConfig.h"
-#include "../../header/Global/ServiceLocator.h"
-#include "../../header/Bullet/BulletConfig.h"
-#include "../../header/Powerups/PowerupService.h"
-#include "../../header/Bullet/BulletController.h"
-#include "../../header/Entity/EntityConfig.h"
+#include "../../Header/Enemy/Controllers/UFOController.h"
+#include "../../Header/Enemy/EnemyView.h"
+#include "../../Header/Enemy/EnemyModel.h"
+#include "../../Header/Enemy/EnemyConfig.h"
+#include "../../Header/Global/ServiceLocator.h"
+#include "../../Header/Bullet/BulletConfig.h"
+#include "../../Header/Powerups/PowerupService.h"
+#include "../../Header/Bullet/BulletController.h"
+#include "../../Header/Entity/EntityConfig.h"
 
 
 namespace Enemy
@@ -53,13 +53,12 @@ namespace Enemy
 				moveRight();
 				break;
 			}
-
 		}
 
 		void UFOController::moveLeft()
 		{
 			sf::Vector2f currentPosition = enemy_model->getEnemyPosition();
-			currentPosition.x -= enemy_model->horizontal_movement_speed * ServiceLocator::getInstance()->getTimeService()->getDeltaTime();
+			currentPosition.x -= horizontal_movement_speed * ServiceLocator::getInstance()->getTimeService()->getDeltaTime();
 
 			if (currentPosition.x <= enemy_model->left_most_position.x)
 			{
@@ -72,7 +71,7 @@ namespace Enemy
 		void UFOController::moveRight()
 		{
 			sf::Vector2f currentPosition = enemy_model->getEnemyPosition();
-			currentPosition.x += enemy_model->horizontal_movement_speed * ServiceLocator::getInstance()->getTimeService()->getDeltaTime();
+			currentPosition.x += horizontal_movement_speed * ServiceLocator::getInstance()->getTimeService()->getDeltaTime();
 
 			if (currentPosition.x >= enemy_model->right_most_position.x)
 			{
@@ -95,7 +94,6 @@ namespace Enemy
 		}
 		void UFOController::destroy()
 		{
-
 			EnemyController::destroy();
 		}
 	}

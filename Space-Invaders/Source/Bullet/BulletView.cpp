@@ -40,11 +40,6 @@ namespace Bullet
 		bullet_image->render();
 	}
 
-	const sf::Sprite& BulletView::getBulletSprite()
-	{
-		return bullet_image->getSprite();
-	}
-
 	sf::String BulletView::getBulletTexturePath()
 	{
 		switch (bullet_controller->getBulletType())
@@ -58,6 +53,11 @@ namespace Bullet
 		case::Bullet::BulletType::TORPEDO:
 			return Config::torpedoe_texture_path;
 		}
+	}
+
+	const sf::Sprite& BulletView::getBulletSprite()
+	{
+		return bullet_image->getSprite();
 	}
 
 	void BulletView::destroy()

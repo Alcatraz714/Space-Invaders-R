@@ -3,6 +3,7 @@
 #include "../../Header/Global/Config.h"
 #include "../../Header/Graphic/GraphicService.h"
 #include "../../Header/Player/PlayerController.h"
+#include "../../header/Player/PlayerModel.h"
 
 namespace Player
 {
@@ -43,6 +44,12 @@ namespace Player
 	const sf::Sprite& PlayerView::getPlayerSprite()
 	{
 		return player_image->getSprite();
+	}
+
+	void PlayerView::setPlayerHighlight(bool b_highlight)
+	{
+		if (b_highlight) player_image->setImageAlpha(PlayerModel::invincible_player_alpha);
+		else player_image->setImageAlpha(255);
 	}
 
 	void PlayerView::destroy()

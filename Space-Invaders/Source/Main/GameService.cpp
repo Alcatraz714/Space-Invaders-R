@@ -1,6 +1,5 @@
 #include "../../Header/Main/GameService.h"
 #include "../../Header/Graphic/GraphicService.h"
-#include "../../Header/Global/ServiceLocator.h"
 #include "../../header/Event/EventService.h"
 #include "../../header/UI/UIService.h"
 
@@ -38,11 +37,6 @@ namespace Main
 		game_window = service_locator->getGraphicService()->getGameWindow(); //set game window (it was null before this)
 	}
 
-	void GameService::showMainMenu()
-	{
-		setGameState(GameState::MAIN_MENU);
-	}
-
 	void GameService::showSplashScreen()
 	{
 		setGameState(GameState::SPLASH_SCREEN);
@@ -57,7 +51,7 @@ namespace Main
 
 	void GameService::render() 
 	{	
-		game_window->clear(service_locator->getGraphicService()->getWindowColor());
+		game_window->clear();
 		service_locator->render();
 		game_window->display();
 	}
@@ -71,7 +65,7 @@ namespace Main
 
 	GameState GameService::getGameState() { return current_state; }
 
-	void GameService::destroy() { service_locator->deleteServiceLocator(); }
+	void GameService::destroy() {  }
 }
 
 

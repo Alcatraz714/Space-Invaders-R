@@ -4,6 +4,7 @@ namespace Player
 {
 	int PlayerModel::player_lives;
 	int PlayerModel::enemies_killed;
+	int PlayerModel::bullets_fired;
 
 	PlayerModel::PlayerModel() { entity_type = Entity::EntityType::PLAYER; }
 
@@ -17,7 +18,9 @@ namespace Player
 		player_position = initial_player_position;
 		//lives set to max of 3 at restart
 		player_lives = max_player_lives;
+
 		enemies_killed = 0;
+		bullets_fired = 0;
 		//powerups
 		b_shield = false;
 		b_rapid_fire = false;
@@ -32,16 +35,6 @@ namespace Player
 	void PlayerModel::setPlayerPosition(sf::Vector2f position)
 	{
 		player_position = position;
-	}
-
-	int PlayerModel::getPlayerScore()
-	{
-		return player_score;
-	}
-
-	void PlayerModel::setPlayerScore(int score)
-	{
-		player_score = score;
 	}
 
 	PlayerState PlayerModel::getPlayerState()
