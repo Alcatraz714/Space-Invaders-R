@@ -1,4 +1,4 @@
-#include "../../Header/Powerups/Controllers/OutscalBombController.h"
+#include "../../header/Powerups/Controllers/OutscalBombController.h"
 #include "../../header/Global/ServiceLocator.h"
 
 namespace Powerup
@@ -10,8 +10,6 @@ namespace Powerup
         OutscalBombController::OutscalBombController(PowerupType type) : PowerupController(type) {}
 
         OutscalBombController::~OutscalBombController() {}
-
-        void OutscalBombController::onCollected() {};
 
         void OutscalBombController::applyPowerup()
         {

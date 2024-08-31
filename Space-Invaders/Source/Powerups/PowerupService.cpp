@@ -1,4 +1,4 @@
-#include "../../Header/Powerups/PowerupService.h"
+#include "../../header/Powerups/PowerupService.h"
 #include "../../header/Powerups/PowerupController.h"
 #include "../../header/Powerups/PowerupConfig.h"
 #include "../../header/Global/ServiceLocator.h"
@@ -11,9 +11,9 @@
 namespace Powerup
 {
 	using namespace Global;
+	using namespace Collision;
 	using namespace Controller;
 	using namespace Collectible;
-	using namespace Collision;
 
 	PowerupService::PowerupService() { }
 
@@ -35,7 +35,7 @@ namespace Powerup
 			powerup->render();
 	}
 
-	PowerupController* PowerupService::createPowerup(PowerupType powerup_type) //creates and returns a pointer to the created powerup
+	PowerupController* PowerupService::createPowerup(PowerupType powerup_type)
 	{
 		switch (powerup_type)
 		{
@@ -53,6 +53,16 @@ namespace Powerup
 		}
 	}
 
+	PowerupController* PowerupService::spawnPowerup(PowerupType powerup_type, sf::Vector2f position)
+	{
+		PowerupController* powerup_controller = createPowerup(powerup_type);
+		powerup_controller->initialize(position);
+
+		ServiceLocator::getInstance()->getCollisionService()->addCollider(dynamic_cast<ICollider*>(powerup_controller));
+		powerup_list.push_back(powerup_controller);
+		return powerup_controller;
+	}
+
 	void PowerupService::destroyFlaggedPowerup()
 	{
 		for (Collectible::ICollectible* powerup : flagged_powerup_list)
@@ -61,16 +71,7 @@ namespace Powerup
 		flagged_powerup_list.clear();
 	}
 
-	PowerupController* PowerupService::spawnPowerup(PowerupType powerup_type, sf::Vector2f position) //initialize a powerup
-	{
-		PowerupController* powerup_controller = createPowerup(powerup_type);
-
-		powerup_controller->initialize(position);
-		powerup_list.push_back(powerup_controller);
-		return powerup_controller;
-	}
-
-	void PowerupService::destroyPowerup(PowerupController* powerup_controller) //destroy the powerup by controller type
+	void PowerupService::destroyPowerup(PowerupController* powerup_controller)
 	{
 		ServiceLocator::getInstance()->getCollisionService()->removeCollider(dynamic_cast<ICollider*>(powerup_controller));
 
