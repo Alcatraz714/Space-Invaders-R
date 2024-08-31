@@ -1,15 +1,17 @@
 #pragma once
 #include "../../Header/Graphic/GraphicService.h"
 #include "../../Header/Event/EventService.h"
+#include "../../Header/UI/UIService.h"
 #include "../../Header/Player/PlayerService.h"
 #include "../../Header/Time/TimeService.h"
-#include "../../Header/UI/UIService.h"
 #include "../../Header/Enemy/EnemyService.h"
 #include "../../Header/Gameplay/GameplayService.h"
 #include "../../Header/Element/ElementService.h"
-#include "../../Header/Sound/SoundService.h"
 #include "../../Header/Bullet/BulletService.h"
 #include "../../Header/Powerups/PowerupService.h"
+#include "../../Header/Sound/SoundService.h"
+#include "../../Header/Collision/CollisionService.h"
+#include "../../Header/AnimationSystem/AnimationService.h"
 
 
 // ServiceLocator Class Summary: This class manages access to various services in the application.
@@ -22,17 +24,19 @@ namespace Global
     private:
 
         // Private Attributes:
-        Graphics::GraphicService* graphic_service;
         Event::EventService* event_service;
-        Player::PlayerService* player_service;
-        Time::TimeService* time_service;
+        Graphics::GraphicService* graphic_service;
         UI::UIService* ui_service;
-        Enemy::EnemyService* enemy_service;
+        Time::TimeService* time_service;
         Gameplay::GameplayService* gameplay_service;
+        Player::PlayerService* player_service;
+        Enemy::EnemyService* enemy_service;
         Element::ElementService* element_service;
-        Sound::SoundService* sound_service;
         Bullet::BulletService* bullet_service;
         Powerup::PowerupService* powerup_service;
+        Sound::SoundService* sound_service;
+        Collision::CollisionService* collision_service;
+        Animation::AnimationService* animation_service;
 
         // Public Methods
         ServiceLocator();
@@ -62,6 +66,8 @@ namespace Global
         Sound::SoundService* getSoundService(); // Retrive the SoundService instance 
         Bullet::BulletService* getBulletService(); // Retrive the BulletService instance
         Powerup::PowerupService* getPowerupService(); // Retrive the PowerupService instance
+        Collision::CollisionService* getCollisionService(); // Retrive the CollisionService instance
+        Animation::AnimationService* getAnimationService(); // Retrive the AnimationService instance
         void deleteServiceLocator();
     };
 }

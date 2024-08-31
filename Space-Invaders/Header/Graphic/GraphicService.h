@@ -34,7 +34,7 @@ namespace Graphics
 		void update(); //..
 		void render(); //..
 		bool isGameWindowOpen(); //check if the window is open
-
+		void setFrameRate(int);
 		sf::RenderWindow* getGameWindow(); //getter for the game window instance
 		sf::Color getWindowColor();//get the color
 	};

@@ -27,6 +27,7 @@ namespace Element
             ~BunkerView();
 
             void initialize(BunkerController* controller);
+            const sf::Sprite& getBunkerSprite();
             void update();
             void render();
         };
