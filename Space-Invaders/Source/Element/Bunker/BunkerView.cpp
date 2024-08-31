@@ -21,6 +21,11 @@ namespace Element
 			initializeImage();
 		}
 
+		const sf::Sprite& BunkerView::getBunkerSprite()
+		{
+			return bunker_image->getSprite();
+		}
+
 		void BunkerView::createUIElements()
 		{
 			bunker_image = new ImageView();

@@ -41,6 +41,11 @@ namespace Powerup
 		powerup_image->render();
 	}
 
+	const sf::Sprite& PowerupView::getPowerupSprite()
+	{
+		return powerup_image->getSprite();
+	}
+
 	sf::String PowerupView::getPowerupTexturePath()
 	{
 		switch (powerup_controller->getPowerupType())

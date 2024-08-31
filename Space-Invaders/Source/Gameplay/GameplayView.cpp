@@ -1,12 +1,11 @@
 #include "../../header/Gameplay/GameplayView.h"
 #include "../../header/Global/ServiceLocator.h"
-#include "../../header/Graphic/GraphicService.h"
 #include "../../Header/Global/Config.h"
+#include "../../header/Graphic/GraphicService.h"
 
 namespace Gameplay
 {
 	using namespace Global;
-	using namespace Graphics;
 	using namespace UI::UIElement;
 
 	GameplayView::GameplayView() { background_image = new ImageView(); }
